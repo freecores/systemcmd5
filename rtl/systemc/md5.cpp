@@ -43,27 +43,9 @@
 // CVS Revision History
 //
 // $Log: not supported by cvs2svn $
-
-#define assign_uint_to_array() \
-{  \
-	message_var[0]=message.read().range(511,480); \
-	message_var[1]=message.read().range(479,448); \
-	message_var[2]=message.read().range(447,416); \
-	message_var[3]=message.read().range(415,384);  \
-	message_var[4]=message.read().range(383,352);   \
-	message_var[5]=message.read().range(351,320);   \
-	message_var[6]=message.read().range(319,288);   \
-	message_var[7]=message.read().range(287,256);   \
-	message_var[8]=message.read().range(255,224);   \
-	message_var[9]=message.read().range(223,192);   \
-	message_var[10]=message.read().range(191,160);  \
-	message_var[11]=message.read().range(159,128);  \
-	message_var[12]=message.read().range(127,96);  \
-	message_var[13]=message.read().range(95,64);  \
-	message_var[14]=message.read().range(63,32);   \
-	message_var[15]=message.read().range(31,0);    \
-}
-
+// Revision 1.1.1.1  2004/09/08 16:24:49  jcastillo
+// Initial release
+//
 
 #include "md5.h"
 
@@ -281,7 +263,22 @@ md5::funcs ()
   sc_uint < 4 > nblock;
   sc_uint < 32 > message_var[16];
 
-  assign_uint_to_array ();
+  message_var[0]=message.read().range(511,480); 
+  message_var[1]=message.read().range(479,448); 
+  message_var[2]=message.read().range(447,416); 
+  message_var[3]=message.read().range(415,384); 
+  message_var[4]=message.read().range(383,352); 
+  message_var[5]=message.read().range(351,320); 
+  message_var[6]=message.read().range(319,288); 
+  message_var[7]=message.read().range(287,256); 
+  message_var[8]=message.read().range(255,224); 
+  message_var[9]=message.read().range(223,192); 
+  message_var[10]=message.read().range(191,160);  
+  message_var[11]=message.read().range(159,128);  
+  message_var[12]=message.read().range(127,96);  
+  message_var[13]=message.read().range(95,64);  
+  message_var[14]=message.read().range(63,32);  
+  message_var[15]=message.read().range(31,0);   
 
   fr_var = 0;
 

@@ -43,6 +43,9 @@
 // CVS Revision History
 //
 // $Log: not supported by cvs2svn $
+// Revision 1.1.1.1  2004/09/08 16:24:49  jcastillo
+// Initial release
+//
 
 #include "systemc.h"
 
@@ -72,6 +75,7 @@ public:
   virtual void resetea (void) = 0;
   virtual void new_text (void) = 0;
   virtual void print_result (void) = 0;
+  virtual void wait_result (void) = 0;
   virtual void hash (sc_uint < 32 > data_4, sc_uint < 32 > data_3,
 		     sc_uint < 32 > data_2, sc_uint < 32 > data_1) = 0;
   virtual void wait_cycles (int cycles) = 0;
@@ -111,22 +115,22 @@ public:
     newtext_i.write (0);
   }
 
+  void wait_result ()
+  {
+    wait (ready_o->posedge_event ());
+  }
+
+  
   void print_result ()
   {
     sc_biguint < 128 > data_o_var;
 
     wait (ready_o->posedge_event ());
     data_o_var = data_o.read ();
-    cout << "HASH: " << (int) (sc_uint < 32 >) data_o_var.range (127,
-								 96) << " " <<
-      (int) (sc_uint < 32 >) data_o_var.range (95,
-					       64) << " " << (int) (sc_uint <
-								    32 >)
-      data_o_var.range (63,
-			32) << " " << (int) (sc_uint <
-					     32 >) data_o_var.range (31,
-								     0) <<
-      endl;
+	 
+    cout << "HASH: " << (int) (sc_uint < 32 >) data_o_var.range (127,96) << " " << (int) (sc_uint < 32 >) data_o_var.range (95,64) << " " << (int) (sc_uint <32 >)
+  	        data_o_var.range (63,32) << " " << (int) (sc_uint <32 >) data_o_var.range (31,0) <<endl;
+   	  
   }
 
   void hash (sc_uint < 32 > data_4, sc_uint < 32 > data_3,
